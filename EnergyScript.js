@@ -74,7 +74,6 @@ id('main').addEventListener('touchend', function(event) {
 })
 // TAP ON HEADER
 id('heading').addEventListener('click',function() {toggleDialog('dataDialog',true);})
-
 // NEW BUTTON
 id('buttonNew').addEventListener('click', function() { // show the log dialog
 	console.log("show add log dialog with today's date and delete button disabled");
@@ -396,6 +395,7 @@ function save() {
 	console.log('data saved to EnergyData');
 }
 id('backupButton').addEventListener('click',function() {toggleDialog('dataDialog',false); backup();});
+id('confirmBackup').addEventListener('click',function() {toggleDialog('backupDialog',false); backup();});
 id('restoreButton').addEventListener('click',function() {toggleDialog('restoreDialog',true)});
 id("fileChooser").addEventListener('change',function() {
     var file=id('fileChooser').files[0];

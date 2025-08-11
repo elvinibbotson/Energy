@@ -48,12 +48,7 @@
 	<button id='backupButton' class='text-button'>BACKUP</button>
 	<button id='restoreButton' class='text-button'>RESTORE</button>
 </div>
-<div id="restoreDialog" class="dialog">
-	<div id='restoreMessage' class="dialog-title">Load from file</div>
-	<input type="file" id="fileChooser">
-	<p>(replaces any existing data)<br>
-	or swipe left to start anew</p>
-</div>
+<input type="file" id="fileChooser" accept=".json" style="display: none">
 <div id='backupDialog' class='dialog'>
 	<div id='backupMessage'>data backup</div>
 	<button id='confirmBackup' class='text-button'>BACKUP</button>

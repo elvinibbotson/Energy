@@ -397,23 +397,29 @@ function save() {
 }
 id('backupButton').addEventListener('click',function() {toggleDialog('dataDialog',false); backup();});
 id('confirmBackup').addEventListener('click',function() {toggleDialog('backupDialog',false); backup();});
-id('restoreButton').addEventListener('click',function() {toggleDialog('restoreDialog',true)});
-id("fileChooser").addEventListener('change',function() {
-    var file=id('fileChooser').files[0];
-    console.log("file: "+file+" name: "+file.name);
-	var fileReader=new FileReader();
-	fileReader.addEventListener('load', function(evt) {
-		console.log("file read: "+evt.target.result);
-	  	var data=evt.target.result;
-		logs=JSON.parse(data);
-		console.log(logs.length+' logs');
-		save(); // WAS saveData();
-		console.log('data imported and saved');
-		toggleDialog('restoreDialog',false);
-		load();
-		// display("backup imported - restart");
-  	});
-  	fileReader.readAsText(file);
+id('restoreButton').addEventListener('click',function() {
+	var event = new MouseEvent('click',{
+		bubbles: true,
+		cancelable: true,
+		view: window
+	});
+	fileChooser.dispatchEvent(event);
+	fileChooser.onchange=(event)=>{
+		var file=id('fileChooser').files[0];
+    	console.log("file name: "+file.name);
+    	var fileReader=new FileReader();
+    	fileReader.addEventListener('load', function(evt) {
+			console.log("file read: "+evt.target.result);
+    		var data=evt.target.result;
+    		logs=JSON.parse(data);
+    		console.log(logs.length+' logs');
+    		save();
+    		console.log('data imported and saved');
+    		load();
+    	});
+    	fileReader.readAsText(file);
+	}
+	toggleDialog('dataDialog',false);
 });
 function backup() {
   	console.log("save backup");

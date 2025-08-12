@@ -373,8 +373,8 @@ function selectLog() {
 function load() {
 	var data=localStorage.getItem('EnergyData');
 	if(!data) {
-		id('restoreMessage').innerText='no data - restore?';
-		toggleDialog('restoreDialog',true);
+		alert('No data - restore backup file?');
+		toggleDialog('dataDialog',true);
 		return;
 	}
 	console.log('data: '+data.length+' bytes');

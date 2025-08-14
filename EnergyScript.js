@@ -373,7 +373,8 @@ function selectLog() {
 function load() {
 	var data=localStorage.getItem('EnergyData');
 	if(!data) {
-		alert('No data - restore backup file?');
+		id('dataMessage').innerText='No data - restore backup?';
+		id('backupButton').disabled=true;
 		toggleDialog('dataDialog',true);
 		return;
 	}
@@ -386,8 +387,9 @@ function load() {
 	var days=today-backupDay;
 	console.log(days+' days since last backup');
 	if(days>4) { // backup reminder every 5 days
-		id('backupMessage').innerText=days+' days since last backup';
-		toggleDialog('backupDialog',true);
+		id('dataMessage').innerText=days+' days since last backup';
+		id('restoreButton').disabled=true;
+		toggleDialog('dataDialog',true);
 	}
 }
 function save() {
@@ -395,8 +397,7 @@ function save() {
 	window.localStorage.setItem('EnergyData',data);
 	console.log('data saved to EnergyData');
 }
-id('backupButton').addEventListener('click',function() {toggleDialog('dataDialog',false); backup();});
-id('confirmBackup').addEventListener('click',function() {toggleDialog('backupDialog',false); backup();});
+id('backupButton').addEventListener('click',backup);
 id('restoreButton').addEventListener('click',function() {
 	var event = new MouseEvent('click',{
 		bubbles: true,
@@ -419,6 +420,8 @@ id('restoreButton').addEventListener('click',function() {
     	});
     	fileReader.readAsText(file);
 	}
+	id('dataMessage').innerText='';
+	id('backupButton').disabled=false;
 	toggleDialog('dataDialog',false);
 });
 function backup() {
@@ -434,7 +437,9 @@ function backup() {
    	a.download=fileName;
     document.body.appendChild(a);
     a.click();
-	// display(fileName+" saved to downloads folder");
+	id('dataMessage').innerText='';
+	id('restoreButton').disabled=false;
+	toggleDialog('dataDialog',false);
 }
 // START-UP CODE
 scr.w=screen.width;

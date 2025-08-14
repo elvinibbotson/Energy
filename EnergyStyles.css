@@ -35,6 +35,9 @@ input {
 	background: none;
 	float: right;
 }
+.text-button:disabled {
+	color: gray;
+}
 .round-button {
 	display: block;
 	position: fixed;

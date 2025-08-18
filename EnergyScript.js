@@ -146,6 +146,7 @@ function  toggleDialog(d, visible) {
     	id(d).style.display='block';
     }
     id('buttonNew').style.display=(visible)?'none':'block';
+    id('curtain').style.height=(visible)?'100%':'0';
 }
 // OPEN SELECTED LOG FOR EDITING
 function openLog() {

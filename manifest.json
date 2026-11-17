@@ -1,6 +1,6 @@
 {
-  "name": "SolidEnergy PWA",
-  "short_name": "SolidEnergy",
+  "name": "Energy PWA",
+  "short_name": "Energy",
   "icons": [
 	{
 		"src": "Energy.png",
